@@ -1,0 +1,169 @@
+
+
+/* Set a background color */
+body {
+  background-color: rgb(236, 238, 240);
+  font-family: Helvetica, sans-serif;
+  height: 800px;
+}
+head{
+  background-color: rgb(236, 238, 240);
+  font-family: Helvetica, sans-serif;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: crimson;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+.container {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+  border-radius: 2%;
+}
+
+/* The circles on the timeline */
+.container::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: -15px;
+  background-color: crimson;
+  background-image: url('https://www.imagemhost.com.br/images/2020/07/01/PngJoy_white-star-icon-white-star-vector-png-hd_6252451.png');
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Place the container to the left */
+.left {
+  left: 0px;
+  margin-left: 0;
+}
+
+/* Place the container to the right */
+.right {
+  left: 50%;
+  margin-left: 0;
+}
+
+/* Add arrows to the left container (pointing right) */
+.left::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  right: 30px;
+  border: medium solid crimson;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent crimson;
+}
+
+/* Add arrows to the right container (pointing left) */
+.right::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border: medium solid crimson;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent crimson transparent transparent;
+}
+
+/* Fix the circle for containers on the right side */
+.right::after {
+  left: -15px;
+  background-size: 15px 15px;
+  background-image: url('https://www.imagemhost.com.br/images/2020/07/01/pngfind.com-book-icon-png-487374.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* The actual content */
+.content {
+  padding: 0px;
+  background-color: white;
+  position: relative;
+
+  border-radius: 2%;
+}
+
+/* Media queries - Responsive timeline on screens less than 600px wide */
+@media screen and (max-width: 600px) {
+/* Place the timelime to the left */
+  .timeline::after {
+    left: 31px;
+  }
+
+/* Full-width containers */
+  .container {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+  }
+
+/* Make sure that all arrows are pointing leftwards */
+  .container::before {
+    left: 60px;
+    border: medium solid white;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+  }
+
+/* Make sure all circles are at the same spot */
+  .left::after, .right::after {
+    left: 15px;
+  }
+
+/* Make all right containers behave like the left ones */
+  .right {
+    left: 0%;
+  }
+
+
+
+}
+/*style to make more similar*/
+.content-head{
+  background-color: crimson;
+  color: aliceblue;
+  font-size: large;
+  border-radius: 2%;
+  height: 40px;
+  padding: 10px;
+}
+.content-text{
+  background-color: white;
+  border-radius: 2%;
+  padding: 20px;
+}
+.main_button{
+  padding-left:44%
+}
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';

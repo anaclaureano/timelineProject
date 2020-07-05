@@ -1,0 +1,51 @@
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+              <div style=" padding-bottom: 5px;"><label style="padding-right: 35px; vertical-align: top;">Header: </label> <input formControlName="header"  placeholder="Enter Title"></div>
+              <div><label style="padding-right: 30px; vertical-align: top;">Content:</label> <textarea formControlName="content" placeholder="Enter content" name="content" rows="6" cols="40"></textarea> </div>
+              <!-- <button type="submit" >Submit</button> -->
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="addEntry()" data-dismiss="modal">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <p></p>
+
+      <div class="row ">
+        <div class="main_button"> <button type="button" class="btn btn-danger btn-lg mt-2" data-toggle="modal" data-target="#exampleModal" >Entry new content</button></div>
+      </div>
+      <div class="timeline">
+
+        <div *ngFor="let con of getContent; let i= index" [ngClass]="(i%2==0)? 'container right' : 'container left'" >
+          <div class="content">
+            <div class="content-head" >{{con.head}}-{{i}}</div>
+            <div class="content-text" >
+              <p [hidden]="edit">{{con.content}}</p>
+              <form [hidden]="!edit" [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+                <textarea formControlName="content" placeholder="Enter content" name="content" rows="6" cols="35">{{con.content}}</textarea>
+              </form>
+
+            </div>
+            <button type="button" class="btn btn-outline-danger m-2 " style="  box-shadow: 5px 5px 0 crimson; -webkit-box-shadow: 2px 2px 0 crimson;-moz-box-shadow: 2px 2px 0 crimson;" (click)="enableEdit(i)">EDIT</button>
+            <button [hidden]="!edit" type="button" class="btn btn-outline-danger m-2 " style="  box-shadow: 5px 5px 0 crimson; -webkit-box-shadow: 2px 2px 0 crimson;-moz-box-shadow: 2px 2px 0 crimson;" (click)="desableEdit(i)">OK</button>
+          </div>
+        </div>
+
+    </div>
