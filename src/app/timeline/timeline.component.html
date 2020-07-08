@@ -3,39 +3,53 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">New entry</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
-              <div style=" padding-bottom: 5px;"><label style="padding-right: 35px; vertical-align: top;">Header: </label> <input formControlName="header"  placeholder="Enter Title"></div>
-              <div><label style="padding-right: 30px; vertical-align: top;">Content:</label> <textarea formControlName="content" placeholder="Enter content" name="content" rows="6" cols="40"></textarea> </div>
+              <div style=" padding-bottom: 5px;"><label style="padding-right: 35px; vertical-align: top;">Header: </label> <input formControlName="header" required minlength="4" placeholder="Enter Title">
+                <div *ngIf="header.invalid && (header.dirty || header.touched || isClicked) " class="alert alert-danger">
+                  <div *ngIf="header.errors.required">
+                    Title is required
+                  </div>
+                  <div *ngIf="header.errors.minlength">
+                    Title must have more than 4 characters
+                  </div>
+                </div>
+              </div>
+              <div><label style="padding-right: 30px; vertical-align: top;">Content:</label> <textarea formControlName="content" placeholder="Enter content" name="content" required minlength="20" rows="6" cols="40"></textarea> </div>
+              <div *ngIf="content.invalid && (content.dirty || content.touched || isClicked) " class="alert alert-danger">
+                <div *ngIf="content.errors.required">
+                  Content is required.
+                </div>
+                <div *ngIf="content.errors.minlength">
+                  Content must have more than 20 characters
+                </div>
+              </div>
               <!-- <button type="submit" >Submit</button> -->
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" (click)="addEntry()" data-dismiss="modal">Save changes</button>
+            <button  class="btn btn-primary" type="submit" (click)="addEntry()" id="modalButton"  >Save changes</button>
           </div>
         </div>
       </div>
     </div>
 
-
-
-
     <p></p>
 
       <div class="row ">
-        <div class="main_button"> <button type="button" class="btn btn-danger btn-lg mt-2" data-toggle="modal" data-target="#exampleModal" >Entry new content</button></div>
+        <div class="main_button"> <button type="button" class="btn btn-danger btn-lg mt-2" data-toggle="modal" data-target="#exampleModal" (click)="addNewEntry()" >Entry new content</button></div>
       </div>
       <div class="timeline">
 
         <div *ngFor="let con of getContent; let i= index" [ngClass]="(i%2==0)? 'container right' : 'container left'" >
           <div class="content">
-            <div class="content-head" >{{con.head}}-{{i}}</div>
+            <div class="content-head" >{{con.head}}</div>
             <div class="content-text" >
               <p [hidden]="edit">{{con.content}}</p>
               <form [hidden]="!edit" [formGroup]="userForm" (ngSubmit)="onFormSubmit()">

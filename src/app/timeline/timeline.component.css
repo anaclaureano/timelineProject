@@ -37,6 +37,7 @@ head{
   background-color: inherit;
   width: 50%;
   border-radius: 2%;
+
 }
 
 /* The circles on the timeline */
@@ -110,7 +111,7 @@ head{
   padding: 0px;
   background-color: white;
   position: relative;
-
+  box-shadow: 5px 5px #888888;
   border-radius: 2%;
 }
 
@@ -162,6 +163,7 @@ head{
   background-color: white;
   border-radius: 2%;
   padding: 20px;
+
 }
 .main_button{
   padding-left:44%
